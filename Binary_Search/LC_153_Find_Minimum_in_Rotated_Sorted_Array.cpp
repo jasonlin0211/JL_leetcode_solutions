@@ -16,6 +16,7 @@ public:
             if (nums[mid-1] > nums[mid]){
                 return nums[mid];
             }
+            // 0 - mid is sorted, pivot point must be on the right side
             if (nums[0] < nums[mid]){
                 l = mid + 1;
             }

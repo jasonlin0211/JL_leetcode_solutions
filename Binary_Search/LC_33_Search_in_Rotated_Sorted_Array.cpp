@@ -10,7 +10,7 @@ public:
             if (nums[mid] == target){
                 return mid;
             }
-            // left part is sorted in ascending order
+            // left part is sorted in ascending order, so we can easily check if target is in this range
             if (nums[l] < nums[mid]){
                 if (nums[l] <= target && target < nums[mid]){
                     r = mid;
@@ -19,7 +19,7 @@ public:
                     l = mid + 1;
                 }
             }
-            // pivot point is in the left part
+            // pivot point is in the left part, so the right part is sorted in ascending order, so we can easily check if target is in this range
             else{
                 if (nums[mid] < target && target <= nums[r-1]){
                     l = mid + 1;

@@ -4,31 +4,22 @@
 
 class Solution:
     def search(self, nums: List[int], target: int) -> int:
-        # this is actually a complicated problem, use the example case to understand!
-        # [4 5 6 7 0 1 2] --> left and right portion
-        # use mid and nums[l] to check which part is the middle in
-        # left: check right if val is greater than mid or val is smaller than nums[l]
-        #       else check left
-        # right: check left if val is smaller than mid or val is greater than nums[r]
-        #      else check right
-        # not found, return -1
-        
-        l, r = 0, len(nums) - 1
-        while l <= r:
+        l, r = 0, len(nums)
+
+        while l < r:
             mid = l + (r-l)//2
             if nums[mid] == target:
                 return mid
-            # mid is in the left portion
-            elif nums[mid] >= nums[l]:
-                if nums[mid] < target or nums[l] > target:
-                    l = mid + 1
+            # left part is sorted in ascending order
+            if nums[l] < nums[mid]:
+                if nums[l] <= target <= nums[mid]:
+                    r = mid
                 else:
-                    r = mid - 1
-            # mid is in the right portion
+                    l = mid + 1
+            # right part is sorted in ascending order
             else:
-                if nums[mid] > target or nums[r] < target:
-                    r = mid - 1
-                else:
+                if nums[mid] <= target <= nums[r-1]:
                     l = mid + 1
-
+                else:
+                    r = mid
         return -1

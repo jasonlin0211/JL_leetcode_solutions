@@ -1,21 +1,22 @@
 # Written by: Jian-Yuan Lin
 # Date: 2022.11.20
 
-
 class Solution:
     def findMin(self, nums: List[int]) -> int:
-        l, r = 0, len(nums) - 1
+        l, r = 0, len(nums)
+        if len(nums) == 1:
+            return nums[0]
         
-        ans = nums[0]
-        while l <= r:
-            # everything is sorted, leftmost must be min!
-            if nums[l] < nums[r]:
-                ans = min(nums[l], ans)
-                break
+        if nums[l] < nums[r-1]:
+            return nums[l]
+
+        while l < r:
             mid = l + (r-l)//2
-            ans = min(ans, nums[mid])
-            if nums[l] <= nums[mid]:
+            if nums[mid-1] > nums[mid]:
+                return nums[mid]
+            # 0 - mid is sorted, pivot point must be on the right side
+            if nums[0] < nums[mid]:
                 l = mid + 1
             else:
-                r = mid - 1
-        return ans
+                r = mid
+        
